@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_main"
+    tools:context=".TimeTableActivity">
+
+    <LinearLayout
+        android:id="@+id/main"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_102sdp"
+        android:layout_marginBottom="691dp"
+        android:background="@drawable/menu_top_edge"
+        android:orientation="horizontal"
+        android:paddingTop="@dimen/_45sdp"
+        app:layout_constraintBottom_toBottomOf="@+id/backgroundImageView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
+
+        <Button
+            android:id="@+id/btnBack2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_3sdp"
+            android:background="@null"
+            android:backgroundTint="@color/black"
+            android:paddingTop="0dp"
+            android:text="@string/back"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_30sdp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_40sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:text="Timetable"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_25sdp" />
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/backgroundImageView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/example_timetable"
+        app:layout_constraintBottom_toTopOf="@id/btn_row"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/main"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TableRow
+        android:id="@+id/btn_row"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/_60sdp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="@dimen/_330sdp"
+        android:layout_marginBottom="0dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.996">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="78dp"
+            android:layout_marginTop="@dimen/_2sdp"
+            android:background="@drawable/ui_menu"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/ece_time"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/ui_left_btn"
+                android:paddingTop="@dimen/_25sdp"
+                android:paddingLeft="@dimen/_35sdp"
+                android:text="  ECE"
+                android:textColor="@color/white"/>
+
+            <TextView
+                android:id="@+id/cse_time"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_marginStart="@dimen/_1sdp"
+                android:background="@color/black"
+                android:text="   CSE"
+                android:paddingTop="@dimen/_25sdp"
+                android:paddingLeft="@dimen/_30sdp"
+                android:textColor="@color/white"/>
+
+            <TextView
+                android:id="@+id/aids_time"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_marginStart="@dimen/_1sdp"
+                android:background="@drawable/ui_right_btn"
+                android:paddingLeft="@dimen/_25sdp"
+                android:paddingTop="@dimen/_25sdp"
+                android:text="AI&amp;DS"
+                android:textColor="@color/white"/>
+        </LinearLayout>
+
+    </TableRow>
+</androidx.constraintlayout.widget.ConstraintLayout>

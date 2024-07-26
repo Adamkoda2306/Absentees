@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Absentees</string>
+    <string name="ai_ds"><![CDATA[AI & DS]]></string>
+    <string name="back"><![CDATA[<-]]></string>
+</resources>

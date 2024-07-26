@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Base.Theme.Absentees" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your light theme here. -->
+        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="colorPrimary">#A3232423</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="fontFamily">@font/audiowide</item>
+        <item name="android:fontFamily">@font/audiowide</item>
+        <item name="android:windowContentTransitions">true</item>
+
+    </style>
+</resources>
