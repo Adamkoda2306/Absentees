@@ -16,6 +16,7 @@ import androidx.core.view.WindowInsetsCompat;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
+import androidx.core.content.ContextCompat;
 import com.github.mikephil.charting.data.PieEntry;
 import java.util.ArrayList;
 import java.util.List;
@@ -41,6 +42,7 @@ public class DetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_detail);
 
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+            getWindow().setStatusBarColor(ContextCompat.getColor(this, R.color.black));
             int flags = getWindow().getDecorView().getSystemUiVisibility();
             flags &= ~View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR; // Remove the light status bar flag if it's set
             getWindow().getDecorView().setSystemUiVisibility(flags);

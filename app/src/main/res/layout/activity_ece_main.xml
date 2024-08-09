@@ -481,7 +481,7 @@
     <LinearLayout
         android:id="@+id/Menuece"
         android:layout_width="@dimen/_125sdp"
-        android:layout_height="@dimen/_129sdp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_1sdp"
         android:background="#696969"
         android:orientation="vertical"
@@ -490,6 +490,7 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/dividerece"
+        android:paddingBottom="@dimen/_3sdp"
         android:visibility="gone"
         app:layout_constraintVertical_bias="0.0">
 
@@ -528,27 +529,6 @@
                 android:layout_weight="1"
                 android:text="Almanac"
                 android:textColor="@color/black"
-                android:textAlignment="center"
-                android:textSize="18sp"
-                android:textStyle="bold|italic" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/infoece"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_40sdp"
-            android:layout_marginTop="@dimen/_3sdp"
-            android:background="#9A9A9A"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/textView5ece"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:layout_weight="1"
-                android:textColor="@color/black"
-                android:text="Information"
                 android:textAlignment="center"
                 android:textSize="18sp"
                 android:textStyle="bold|italic" />

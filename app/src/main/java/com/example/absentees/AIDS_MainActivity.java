@@ -17,6 +17,7 @@ import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import java.util.Calendar;
+import androidx.core.content.ContextCompat;
 import androidx.activity.EdgeToEdge;
 
 public class AIDS_MainActivity extends AppCompatActivity {
@@ -51,6 +52,7 @@ public class AIDS_MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_aids_main);
 
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+            getWindow().setStatusBarColor(ContextCompat.getColor(this, R.color.black));
             int flags = getWindow().getDecorView().getSystemUiVisibility();
             flags &= ~View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR; // Remove the light status bar flag if it's set
             getWindow().getDecorView().setSystemUiVisibility(flags);

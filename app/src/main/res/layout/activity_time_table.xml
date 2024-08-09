@@ -79,38 +79,50 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/ece_time"
+                android:id="@+id/sec1_time"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@drawable/ui_left_btn"
                 android:paddingTop="@dimen/_25sdp"
-                android:paddingLeft="@dimen/_35sdp"
-                android:text="  ECE"
+                android:paddingLeft="@dimen/_30sdp"
+                android:text=" SEC 1"
                 android:textColor="@color/white"/>
 
             <TextView
-                android:id="@+id/cse_time"
+                android:id="@+id/sec2_time"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:layout_marginStart="@dimen/_1sdp"
                 android:background="@color/black"
-                android:text="   CSE"
+                android:text="SEC 2"
                 android:paddingTop="@dimen/_25sdp"
-                android:paddingLeft="@dimen/_30sdp"
+                android:paddingLeft="@dimen/_22sdp"
                 android:textColor="@color/white"/>
 
             <TextView
-                android:id="@+id/aids_time"
+                android:id="@+id/sec3_time"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/black"
+                android:layout_marginStart="@dimen/_1sdp"
+                android:text="SEC 3"
+                android:paddingTop="@dimen/_25sdp"
+                android:paddingLeft="@dimen/_22sdp"
+                android:textColor="@color/white"/>
+
+            <TextView
+                android:id="@+id/ece_time"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:layout_marginStart="@dimen/_1sdp"
                 android:background="@drawable/ui_right_btn"
-                android:paddingLeft="@dimen/_25sdp"
+                android:paddingLeft="@dimen/_20sdp"
                 android:paddingTop="@dimen/_25sdp"
-                android:text="AI&amp;DS"
+                android:text="ECE"
                 android:textColor="@color/white"/>
         </LinearLayout>
 

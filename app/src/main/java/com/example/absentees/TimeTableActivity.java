@@ -13,12 +13,13 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
+import androidx.core.content.ContextCompat;
 import android.widget.ImageView;
 
 public class TimeTableActivity extends AppCompatActivity {
 
     private ImageView backgroundImageView;
-    private TextView button1, button2, button3;
+    private TextView button1, button2, button3, button4;
     private Button btnBack;
 
     private TextView selectedTextView = null;
@@ -30,6 +31,7 @@ public class TimeTableActivity extends AppCompatActivity {
         setContentView(R.layout.activity_time_table);
 
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+            getWindow().setStatusBarColor(ContextCompat.getColor(this, R.color.black));
             int flags = getWindow().getDecorView().getSystemUiVisibility();
             flags &= ~View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR; // Remove the light status bar flag if it's set
             getWindow().getDecorView().setSystemUiVisibility(flags);
@@ -41,9 +43,10 @@ public class TimeTableActivity extends AppCompatActivity {
         });
 
         backgroundImageView = findViewById(R.id.backgroundImageView);
-        button1 = findViewById(R.id.ece_time);
-        button2 = findViewById(R.id.cse_time);
-        button3 = findViewById(R.id.aids_time);
+        button4 = findViewById(R.id.ece_time);
+        button1 = findViewById(R.id.sec1_time);
+        button3 = findViewById(R.id.sec2_time);
+        button2 = findViewById(R.id.sec3_time);
         btnBack = findViewById(R.id.btnBack2);
 
         // Set initial image
@@ -71,6 +74,13 @@ public class TimeTableActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 updateSelection(button3);
+                backgroundImageView.setImageResource(R.drawable.example_timetable);
+            }
+        });
+        button4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                updateSelection(button4);
                 backgroundImageView.setImageResource(R.drawable.menu_dot);
             }
         });
@@ -94,6 +104,8 @@ public class TimeTableActivity extends AppCompatActivity {
         } else if (textView == button2) {
             textView.setBackgroundColor(Color.WHITE);
         } else if (textView == button3) {
+            textView.setBackgroundColor(Color.WHITE);
+        } else if (textView == button4) {
             textView.setBackgroundResource(R.drawable.ui_right_btn_clicked);
         }
         textView.setTextColor(Color.BLACK);
@@ -106,6 +118,8 @@ public class TimeTableActivity extends AppCompatActivity {
         } else if (textView == button2) {
             textView.setBackgroundColor(Color.BLACK);
         } else if (textView == button3) {
+            textView.setBackgroundColor(Color.BLACK);
+        } else if (textView == button4) {
             textView.setBackgroundResource(R.drawable.ui_right_btn);
         }
         textView.setTextColor(Color.WHITE);
