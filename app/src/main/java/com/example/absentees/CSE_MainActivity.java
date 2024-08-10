@@ -31,7 +31,7 @@ public class CSE_MainActivity extends AppCompatActivity {
             new AttendanceData("ADSA", 36, 0, 0, 0),
             new AttendanceData("OS", 36, 0, 0, 0),
             new AttendanceData("DBMS", 36, 0, 0, 0),
-            new AttendanceData("PC", 36, 0, 0, 0)
+            new AttendanceData("PC", 24, 0, 0, 0)
     };
 
     private ImageView imageView;

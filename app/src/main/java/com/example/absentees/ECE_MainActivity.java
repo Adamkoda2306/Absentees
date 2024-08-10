@@ -32,7 +32,7 @@ public class ECE_MainActivity extends AppCompatActivity {
             new AttendanceData("ES", 36, 0, 0, 0),
             new AttendanceData("CNA", 36, 0, 0, 0),
             new AttendanceData("CS", 36, 0, 0, 0),
-            new AttendanceData("PC", 36, 0, 0, 0)
+            new AttendanceData("PC", 24, 0, 0, 0)
     };
 
     private ImageView imageView;
