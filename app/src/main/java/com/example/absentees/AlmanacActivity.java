@@ -7,9 +7,13 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.content.ContextCompat;
 import android.view.View;
+import android.widget.Button;
+
 import androidx.core.view.WindowInsetsCompat;
 
 public class AlmanacActivity extends AppCompatActivity {
+
+    private Button btnBack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +33,20 @@ public class AlmanacActivity extends AppCompatActivity {
             return insets;
         });
 
+        btnBack = findViewById(R.id.btnBack4);
 
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
+
+    }
+
+    @Override
+    public void onBackPressed() {
+        // Implement back navigation
+        super.onBackPressed(); // This will finish the current activity and go back to the previous activity or fragment
     }
 }

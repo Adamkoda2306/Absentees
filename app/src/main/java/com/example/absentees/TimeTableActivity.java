@@ -19,7 +19,7 @@ import android.widget.ImageView;
 public class TimeTableActivity extends AppCompatActivity {
 
     private ImageView backgroundImageView;
-    private TextView button1, button2, button3, button4;
+    private TextView button1, button2, button3, button4, button5;
     private Button btnBack;
 
     private TextView selectedTextView = null;
@@ -47,10 +47,11 @@ public class TimeTableActivity extends AppCompatActivity {
         button1 = findViewById(R.id.sec1_time);
         button3 = findViewById(R.id.sec2_time);
         button2 = findViewById(R.id.sec3_time);
+        button5 = findViewById(R.id.aids_time);
         btnBack = findViewById(R.id.btnBack2);
 
         // Set initial image
-        backgroundImageView.setImageResource(R.drawable.example_timetable);
+        backgroundImageView.setImageResource(R.drawable.sec3time);
         button2.setTextColor(Color.BLACK);
         button2.setBackgroundColor(Color.WHITE);
         selectedTextView = button2;
@@ -60,31 +61,37 @@ public class TimeTableActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 updateSelection(button1);
-                backgroundImageView.setImageResource(R.drawable.menu_dot);
+                backgroundImageView.setImageResource(R.drawable.sec1time);
             }
         });
         button2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 updateSelection(button2);
-                backgroundImageView.setImageResource(R.drawable.example_timetable);
+                backgroundImageView.setImageResource(R.drawable.sec3time);
             }
         });
         button3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 updateSelection(button3);
-                backgroundImageView.setImageResource(R.drawable.example_timetable);
+                backgroundImageView.setImageResource(R.drawable.sec2time);
             }
         });
         button4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 updateSelection(button4);
-                backgroundImageView.setImageResource(R.drawable.menu_dot);
+                backgroundImageView.setImageResource(R.drawable.ecetime);
             }
         });
-
+        button5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                updateSelection(button5);
+                backgroundImageView.setImageResource(R.drawable.aidstime);
+            }
+        });
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -107,6 +114,8 @@ public class TimeTableActivity extends AppCompatActivity {
             textView.setBackgroundColor(Color.WHITE);
         } else if (textView == button4) {
             textView.setBackgroundResource(R.drawable.ui_right_btn_clicked);
+        } else if (textView == button5) {
+            textView.setBackgroundColor(Color.WHITE);
         }
         textView.setTextColor(Color.BLACK);
         selectedTextView = textView;
@@ -121,6 +130,8 @@ public class TimeTableActivity extends AppCompatActivity {
             textView.setBackgroundColor(Color.BLACK);
         } else if (textView == button4) {
             textView.setBackgroundResource(R.drawable.ui_right_btn);
+        } else if (textView == button5) {
+            textView.setBackgroundColor(Color.BLACK);
         }
         textView.setTextColor(Color.WHITE);
     }

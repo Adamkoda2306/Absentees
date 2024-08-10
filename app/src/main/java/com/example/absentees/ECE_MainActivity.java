@@ -27,12 +27,12 @@ public class ECE_MainActivity extends AppCompatActivity {
     private static final String ATTENDANCE_KEY_PREFIX = "attendance_";
 
     private static AttendanceData[] attendanceData = {
-            new AttendanceData("RANAC", 35, 0, 0, 0),
-            new AttendanceData("OOPs", 32, 0, 0, 0),
-            new AttendanceData("ES", 30, 0, 0, 0),
-            new AttendanceData("CNA", 30, 0, 0, 0),
-            new AttendanceData("CS", 32, 0, 0, 0),
-            new AttendanceData("PC", 33, 0, 0, 0)
+            new AttendanceData("RANAC", 48, 0, 0, 0),
+            new AttendanceData("OOPs", 36, 0, 0, 0),
+            new AttendanceData("ES", 36, 0, 0, 0),
+            new AttendanceData("CNA", 36, 0, 0, 0),
+            new AttendanceData("CS", 36, 0, 0, 0),
+            new AttendanceData("PC", 36, 0, 0, 0)
     };
 
     private ImageView imageView;
@@ -43,7 +43,7 @@ public class ECE_MainActivity extends AppCompatActivity {
     private LinearLayout hiddenLayout;
     private boolean isMenuHidden = true;
     private TextView[] subjects;
-    private TextView timetable;
+    private TextView timetable,alamanac;
     private SharedPreferences sharedPreferences;
 
     @Override
@@ -102,6 +102,15 @@ public class ECE_MainActivity extends AppCompatActivity {
 
         scrollView2 = findViewById(R.id.scrollView2ece);
         timetable = findViewById(R.id.timetabletextece);
+        alamanac = findViewById(R.id.alamanactextece);
+
+        alamanac.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent_alamanac = new Intent(ECE_MainActivity.this, AlmanacActivity.class);
+                startActivity(intent_alamanac);
+            }
+        });
 
         timetable.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -200,7 +209,7 @@ public class ECE_MainActivity extends AppCompatActivity {
                     hiddenMenuLayout.setVisibility(View.GONE);
                     isMenuHidden = !isMenuHidden;
                 }
-            }, 10000); // Hide the menu after 10 seconds
+            }, 6000); // Hide the menu after 6 seconds
         } else {
             hiddenMenuLayout.setVisibility(View.GONE);
         }

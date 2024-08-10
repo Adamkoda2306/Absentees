@@ -30,14 +30,14 @@
             android:paddingTop="0dp"
             android:text="@string/back"
             android:textColor="@color/white"
-            android:textSize="@dimen/_30sdp" />
+            android:textSize="@dimen/_20sdp" />
 
         <TextView
             android:id="@+id/tvSubjectName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_40sdp"
-            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginStart="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_15sdp"
             android:text="Subject Name"
             android:textColor="@color/white"
             android:textSize="@dimen/_25sdp" />
