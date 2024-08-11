@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - Absentees</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <header>
+        <img src="{{ url_for('static', filename='logo.png') }}" alt="My App Logo" class="logo">
+        <h1>ABSENTEES</h1>
+        <button class="download-btn" onclick="downloadApp()">Download</button>
+    </header>
+
+    <section id="about">
+        <h2>Information About App</h2>
+        <ul>
+            <li>Absentees is an Android application designed to provide an abstract view of a student's personal attendance.</li>
+            <li>Currently, it is available only for Semester 3 students of IIIT SriCity, with plans to update it for all batches in the future.</li>
+            <li>The application allows users to:
+                <ul>
+                    <li>Maintain a personal record of the number of classes missed.</li>
+                    <li>Track the number of classes needed to maintain a safe grade, all within an attractive and interactive UI.</li>
+                </ul>
+            </li>
+            <li>A timetable and almanac with a clean and clear design help users plan vacations or trips effectively.</li>
+            <li>Users can:
+                <ul>
+                    <li>Add extra classes or remove scheduled classes from their dashboard.</li>
+                    <li>Undo actions if a mistake occurs.</li>
+                </ul>
+            </li>
+            <li>Before resetting your phone or reinstalling the app, note that:
+                <ul>
+                    <li>There is a risk of losing data during reinstallation, so make sure to save your values and update them afterward.</li>
+                </ul>
+            </li>
+            <li>For any inquiries, visit the contact page and fill out the form.</li>
+        </ul>
+        
+    </section>
+
+    <section id="buttons">
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('home') }}">Home</a></li>
+                <li><a href="{{ url_for('about') }}">Info</a></li>
+                <li><a href="{{ url_for('contact') }}">Contact</a></li>
+            </ul>
+        </nav>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Absentees. All rights reserved.</p>
+    </footer>
+</body>
+</html>

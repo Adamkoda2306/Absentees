@@ -1,0 +1,294 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #000; /* Change to black */
+    color: white;
+    padding: 20px 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Adjust spacing to allow content on both sides */
+    position: relative;
+    flex-wrap: nowrap;
+}
+
+header .logo {
+    height: 50px; /* Adjust the size of your logo */
+    margin-left: 20px;
+}
+
+header h1 {
+    flex-grow: 1;
+    margin: 0;
+    text-align: center;
+}
+
+.download-btn {
+    background-color: #FFFFFF;
+    color: black;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    margin-right: 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+
+.download-btn:hover {
+    background-color: #000;
+    color: white;
+}
+
+/* Section containing buttons */
+section#buttons {
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    background-color: #f1f1f1; /* Light background for buttons section */
+}
+
+section#buttons nav ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center; /* Center the buttons */
+}
+
+section#buttons nav ul li {
+    margin: 0 10px; /* Space between buttons */
+}
+
+section#buttons nav ul li a {
+    color: black;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    background-color: #000; /* Background for buttons */
+    color: white;
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+
+section#buttons nav ul li a:hover {
+    background-color: #FFFFFF;
+    color: black;
+}
+
+/* Other sections */
+
+section#home {
+    padding: 20px;
+    margin: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+section#home .content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+section#home .text {
+    flex: 1;
+}
+
+section#home .image-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+section#home .image-text {
+    margin-bottom: 20px;
+}
+
+section#home .image img {
+    max-width: 20%; /* Reduce the size of the image */
+    height: auto;
+    margin: 0 auto;
+}
+
+.carousel-item {
+    text-align: center;
+}
+
+section#contact {
+    padding: 50px 10px;
+    background-color: #ffffff; /* Dark background for contact section */
+    color: #000000;
+    text-align: center;
+}
+
+section#contact h2 {
+    font-size: 28px;
+    margin-bottom: 20px;
+}
+
+section#contact form {
+    max-width: 500px;
+    margin: 0 auto;
+    text-align: left;
+}
+
+section#contact label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+section#contact input[type="text"],
+section#contact input[type="email"],
+section#contact textarea {
+    width: 100%; /* Full width of the parent form */
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ffffff; /* White border */
+    background-color: #111111; /* Dark background to match theme */
+    color: #ffffff; /* White text for contrast */
+    border-radius: 5px; /* Rounded corners */
+    box-sizing: border-box; /* Ensures padding is included in the width/height */
+}
+
+section#contact textarea {
+    height: 150px;
+}
+
+section#contact button[type="submit"] {
+    background-color: #000000;
+    color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+    display: block;
+    margin: 0 auto;
+}
+
+section#contact button[type="submit"]:hover {
+    background-color: #dddddd;
+    color: #000000;
+}
+
+footer {
+    background-color: #f1f1f1;
+    text-align: center;
+    padding: 10px;
+    position: relative; /* Change from fixed to relative */
+    bottom: 0;
+    width: 100%;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    margin: auto;
+}
+
+form label, form input {
+    margin: 5px 0;
+}
+
+@media (max-width: 768px) {
+    header {
+        flex-direction: row;
+        text-align: center;
+    }
+
+    header .logo {
+        margin-left: 10px;
+    }
+
+    header h1 {
+        text-align: center;
+    }
+
+    .download-btn {
+        margin-right: 10px;
+    }
+
+    section#home {
+        flex-direction: column;
+    }
+
+    section#home .content {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    section#home .image-content {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    section#home .image-text {
+        margin: 0 0 20px 0;
+    }
+
+    section#home .image {
+        text-align: center;
+    }
+
+    section, footer {
+        padding: 10px;
+        margin: 10px;
+    }
+
+    form {
+        width: 100%;
+        padding: 0 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    header {
+        padding: 10px;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    header h1 {
+        font-size: 1.2em;
+        text-align: center;
+    }
+
+    .download-btn {
+        padding: 8px 16px;
+    }
+
+    section#contact textarea {
+        height: 120px; /* Adjusts height for smaller screens */
+    }
+
+    section#contact {
+        padding: 20px;
+        text-align: center;
+        padding-top: 10px;
+    }
+
+    section#contact form {
+        max-width: 100%;
+        text-align: center;
+        padding: 8px 4px;
+    }
+
+    section#contact label,
+    section#contact input[type="text"],
+    section#contact input[type="email"],
+    section#contact textarea {
+        text-align: center;
+    }
+
+    section#contact button[type="submit"] {
+        margin: 20px auto;
+    }
+}
