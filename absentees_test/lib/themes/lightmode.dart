@@ -5,8 +5,8 @@ final colorsurface = Colors.grey.shade100;
 ThemeData lightMode = ThemeData(
   colorScheme: ColorScheme.light(
     surface: Colors.grey.shade100,
-    primary: Color.fromRGBO(198, 199, 199, 1),
-    secondary: Color.fromARGB(255, 27, 139, 231),
+    primary: Colors.grey.shade100,
+    secondary: const Color.fromARGB(255, 27, 139, 231),
     inversePrimary: Colors.black,
   ),
   appBarTheme: AppBarTheme(

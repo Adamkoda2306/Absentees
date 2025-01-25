@@ -13,7 +13,6 @@ class ClassesData {
   static const columnSubjectName = 'subjectName';
   static const columnTotalClasses = 'totalClasses';
   static const columnAbsents = 'absents';
-  static const columnCompletedClasses = 'completedClasses';
 
   // Private constructor for Singleton pattern
   ClassesData._privateConstructor();
@@ -62,8 +61,7 @@ class ClassesData {
         $columnId INTEGER PRIMARY KEY AUTOINCREMENT,
         $columnSubjectName TEXT NOT NULL,
         $columnTotalClasses INTEGER NOT NULL,
-        $columnAbsents INTEGER NOT NULL,
-        $columnCompletedClasses INTEGER NOT NULL
+        $columnAbsents INTEGER NOT NULL
       )
     ''');
 
@@ -80,26 +78,22 @@ class ClassesData {
       {
         'subjectName': subjectNames.isNotEmpty ? subjectNames[0] : 'Subject 1',
         'totalClasses': 48,
-        'absents': 5,
-        'completedClasses': 20
+        'absents': 0
       },
       {
         'subjectName': subjectNames.length > 1 ? subjectNames[1] : 'Subject 2',
         'totalClasses': 48,
-        'absents': 0,
-        'completedClasses': 0
+        'absents': 0
       },
       {
         'subjectName': subjectNames.length > 2 ? subjectNames[2] : 'Subject 3',
         'totalClasses': 48,
-        'absents': 0,
-        'completedClasses': 0
+        'absents': 0
       },
       {
         'subjectName': subjectNames.length > 3 ? subjectNames[3] : 'Subject 4',
         'totalClasses': 48,
-        'absents': 0,
-        'completedClasses': 0
+        'absents': 0
       },
       {
         'subjectName': subjectNames.length > 4 ? subjectNames[4] : 'Subject 5',
@@ -108,14 +102,12 @@ class ClassesData {
                 subjectNames[4] == "OPC")
             ? 24
             : 48,
-        'absents': 0,
-        'completedClasses': 0
+        'absents': 0
       },
       {
         'subjectName': subjectNames.length > 5 ? subjectNames[5] : 'Subject 6',
         'totalClasses': 24,
-        'absents': 0,
-        'completedClasses': 0
+        'absents': 0
       },
     ];
 
@@ -126,8 +118,7 @@ class ClassesData {
         {
           columnSubjectName: classData['subjectName'],
           columnTotalClasses: classData['totalClasses'],
-          columnAbsents: classData['absents'],
-          columnCompletedClasses: classData['completedClasses'],
+          columnAbsents: classData['absents']
         },
         conflictAlgorithm: ConflictAlgorithm.replace,
       );
@@ -171,8 +162,7 @@ class ClassesData {
         {
           columnSubjectName: subjectName,
           columnTotalClasses: totalClasses,
-          columnAbsents: absents,
-          columnCompletedClasses: completedClasses,
+          columnAbsents: absents
         },
         where: '$columnSubjectName = ?',
         whereArgs: [subjectName],
@@ -184,8 +174,7 @@ class ClassesData {
         {
           columnSubjectName: subjectName,
           columnTotalClasses: totalClasses,
-          columnAbsents: absents,
-          columnCompletedClasses: completedClasses,
+          columnAbsents: absents
         },
         conflictAlgorithm: ConflictAlgorithm.replace,
       );

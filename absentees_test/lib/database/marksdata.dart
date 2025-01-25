@@ -1,3 +1,4 @@
+import 'dart:developer'; // Import the log framework
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 
@@ -30,6 +31,7 @@ class DBHelper {
             featureMarks INTEGER
           )
         ''');
+        log('Database created with table Marks', name: 'DBHelper');
       },
       onUpgrade: (db, oldVersion, newVersion) async {
         if (oldVersion < 2) {
@@ -37,6 +39,7 @@ class DBHelper {
           await db.execute('''
             ALTER TABLE Marks ADD COLUMN featureName TEXT;
           ''');
+          log('Database upgraded to version $newVersion', name: 'DBHelper');
         }
       },
     );
@@ -51,26 +54,34 @@ class DBHelper {
       'featureName': featureName,
       'featureMarks': featureMarks,
     });
-    print(
-        "Data Added: ID=$id, Subject=$subjectName, Feature=$featureName, Marks=$featureMarks");
+    log("Data Added: ID=$id, Subject=$subjectName, Feature=$featureName, Marks=$featureMarks",
+        name: 'DBHelper');
     return id;
   }
 
   // Get all marks data
   Future<List<Map<String, dynamic>>> getMarks() async {
     final db = await database;
-    return await db.query('Marks');
+    List<Map<String, dynamic>> marks = await db.query('Marks');
+    log('Fetched marks data: ${marks.length} entries', name: 'DBHelper');
+    return marks;
   }
 
   // Update the feature marks of a specific entry
   Future<int> updateFeature(int id, Map<String, dynamic> data) async {
     final db = await database;
-    return await db.update('Marks', data, where: 'id = ?', whereArgs: [id]);
+    int rowsAffected =
+        await db.update('Marks', data, where: 'id = ?', whereArgs: [id]);
+    log('Updated entry ID=$id with data=$data', name: 'DBHelper');
+    return rowsAffected;
   }
 
   // Delete a mark entry
   Future<int> deleteMark(int id) async {
     final db = await database;
-    return await db.delete('Marks', where: 'id = ?', whereArgs: [id]);
+    int rowsDeleted =
+        await db.delete('Marks', where: 'id = ?', whereArgs: [id]);
+    log('Deleted entry ID=$id', name: 'DBHelper');
+    return rowsDeleted;
   }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'dart:developer' as developer;
 import 'package:shared_preferences/shared_preferences.dart';
 import '../database/marksdata.dart';
 import '../database/subjectdata.dart';
@@ -65,7 +66,7 @@ class _MarksMemoState extends State<Marksmemo> {
             Theme.of(context).colorScheme.inversePrimary;
         return AlertDialog(
           title: Text(
-            mark != null ? 'Edit Feature Marks' : 'Add Subject',
+            mark != null ? 'Edit Score' : 'Add Score',
             style: TextStyle(
               color: inversePrimaryColor,
             ),
@@ -98,7 +99,8 @@ class _MarksMemoState extends State<Marksmemo> {
                   onChanged: (String? newSubject) {
                     setState(() {
                       selectedSubject = newSubject;
-                      print('Subject Selected: $selectedSubject');
+                      developer.log('Subject Selected: $selectedSubject',
+                          name: 'MarksMemo');
                     });
                     Navigator.of(ctx)
                         .pop(); // Close the dialog immediately after selection
@@ -110,7 +112,7 @@ class _MarksMemoState extends State<Marksmemo> {
                 TextField(
                   controller: featureNameController,
                   decoration: InputDecoration(
-                    labelText: 'Feature Name',
+                    labelText: 'Test Type',
                     labelStyle: TextStyle(
                       color: inversePrimaryColor,
                     ),
@@ -135,7 +137,7 @@ class _MarksMemoState extends State<Marksmemo> {
                   controller: featureMarksController,
                   keyboardType: TextInputType.number,
                   decoration: InputDecoration(
-                    labelText: 'Feature Marks',
+                    labelText: 'Score',
                     labelStyle: TextStyle(
                       color: inversePrimaryColor,
                     ),
@@ -191,10 +193,11 @@ class _MarksMemoState extends State<Marksmemo> {
                     // Insert new subject with the provided feature and marks
                     int id = await _dbHelper.insertSubjectWithFeature(
                         selectedSubject!, featureName, featureMarks);
-                    print('Inserted ID: $id');
+                    developer.log('Inserted ID: $id', name: 'MarksMemo');
                   } else {
                     // Update existing feature marks
                     await _dbHelper.updateFeature(mark['id'], {
+                      'subjectName': selectedSubject,
                       'featureName': featureName,
                       'featureMarks': featureMarks,
                     });
@@ -254,102 +257,121 @@ class _MarksMemoState extends State<Marksmemo> {
           ),
         )),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: ListView.builder(
-          itemCount: _marks.length,
-          itemBuilder: (ctx, index) {
-            final mark = _marks[index];
-            return Dismissible(
-              key: Key(mark['id'].toString()),
-              background: Container(
-                decoration: BoxDecoration(
-                  color: Colors.red.withOpacity(0.8), // Attractive red color
-                  borderRadius: BorderRadius.circular(12), // Round corners
-                ),
-                alignment: Alignment.centerRight,
-                padding: const EdgeInsets.all(16),
-                child: const Icon(Icons.delete, color: Colors.white),
-              ),
-              direction: DismissDirection.endToStart,
-              onDismissed: (direction) {
-                _deleteMark(mark['id']);
-              },
-              confirmDismiss: (direction) async {
-                return await showDialog<bool>(
-                  context: context,
-                  builder: (BuildContext context) {
-                    return AlertDialog(
-                      title: Text(
-                        'Confirm Deletion',
-                        style: TextStyle(
-                          color: inversePrimaryColor,
-                        ),
-                      ),
-                      content: Text(
-                        'Are you sure you want to delete this mark?',
-                        style: TextStyle(
-                          color: inversePrimaryColor,
-                        ),
-                      ),
-                      actions: <Widget>[
-                        TextButton(
-                          onPressed: () => Navigator.of(context).pop(false),
-                          child: Text(
-                            'Cancel',
-                            style: TextStyle(
-                              color: inversePrimaryColor,
-                            ),
-                          ),
-                        ),
-                        TextButton(
-                          onPressed: () => Navigator.of(context).pop(true),
-                          child: const Text(
-                            'Delete',
-                            style: TextStyle(
-                              color: Colors.redAccent,
-                            ),
-                          ),
-                        ),
-                      ],
-                    );
-                  },
-                );
-              },
-              child: Card(
-                elevation: 4,
-                color: primaryColor,
-                margin: const EdgeInsets.symmetric(vertical: 8),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12), // Round corners
-                ),
-                child: ListTile(
-                  contentPadding: const EdgeInsets.all(8.0),
-                  title: Text(
-                    mark['subjectName'],
-                    style: TextStyle(
-                      color: inversePrimaryColor,
-                    ),
-                  ),
-                  subtitle: Text(
-                    '${mark['featureName']}: ${mark['featureMarks']}',
-                    style: TextStyle(
-                      color: inversePrimaryColor,
-                    ),
-                  ),
-                  trailing: IconButton(
-                    icon: Icon(
-                      Icons.edit,
-                      color: secondaryColor,
-                    ),
-                    onPressed: () => _showPopup(mark: mark),
+      body: _marks.isEmpty
+          ? Center(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  'Store your Test Scores here',
+                  style: TextStyle(
+                    color: Theme.of(context)
+                        .colorScheme
+                        .inversePrimary
+                        .withOpacity(0.3),
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
               ),
-            );
-          },
-        ),
-      ),
+            )
+          : Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: ListView.builder(
+                itemCount: _marks.length,
+                itemBuilder: (ctx, index) {
+                  final mark = _marks[index];
+                  return Dismissible(
+                    key: Key(mark['id'].toString()),
+                    background: Container(
+                      decoration: BoxDecoration(
+                        color: Colors.red.withOpacity(0.8),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      alignment: Alignment.centerRight,
+                      padding: const EdgeInsets.all(16),
+                      child: const Icon(Icons.delete, color: Colors.white),
+                    ),
+                    direction: DismissDirection.endToStart,
+                    onDismissed: (direction) {
+                      _deleteMark(mark['id']);
+                    },
+                    confirmDismiss: (direction) async {
+                      return await showDialog<bool>(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return AlertDialog(
+                            title: Text(
+                              'Confirm Deletion',
+                              style: TextStyle(
+                                color: inversePrimaryColor,
+                              ),
+                            ),
+                            content: Text(
+                              'Are you sure you want to delete this mark?',
+                              style: TextStyle(
+                                color: inversePrimaryColor,
+                              ),
+                            ),
+                            actions: <Widget>[
+                              TextButton(
+                                onPressed: () =>
+                                    Navigator.of(context).pop(false),
+                                child: Text(
+                                  'Cancel',
+                                  style: TextStyle(
+                                    color: inversePrimaryColor,
+                                  ),
+                                ),
+                              ),
+                              TextButton(
+                                onPressed: () =>
+                                    Navigator.of(context).pop(true),
+                                child: const Text(
+                                  'Delete',
+                                  style: TextStyle(
+                                    color: Colors.redAccent,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          );
+                        },
+                      );
+                    },
+                    child: Card(
+                      elevation: 4,
+                      color: primaryColor,
+                      margin: const EdgeInsets.symmetric(vertical: 8),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: ListTile(
+                        contentPadding: const EdgeInsets.all(8.0),
+                        title: Text(
+                          mark['subjectName'],
+                          style: TextStyle(
+                            color: inversePrimaryColor,
+                          ),
+                        ),
+                        subtitle: Text(
+                          '${mark['featureName']}: ${mark['featureMarks']}',
+                          style: TextStyle(
+                            color: inversePrimaryColor,
+                          ),
+                        ),
+                        trailing: IconButton(
+                          icon: Icon(
+                            Icons.edit,
+                            color: secondaryColor,
+                          ),
+                          onPressed: () => _showPopup(mark: mark),
+                        ),
+                      ),
+                    ),
+                  );
+                },
+              ),
+            ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => _showPopup(),
         child: Icon(

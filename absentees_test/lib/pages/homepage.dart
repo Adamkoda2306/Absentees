@@ -1,5 +1,5 @@
-import 'package:absentees_test/pages/alamanacpage.dart';
-import 'package:absentees_test/pages/marksmemo.dart';
+import 'alamanacpage.dart';
+import 'marksmemo.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -86,8 +86,8 @@ class _HomepageState extends State<Homepage> {
           children: [
             _buildHomePage(),
             const Attendancereport(),
-            const Alamanacpage(),
             const Marksmemo(),
+            const Alamanacpage(),
           ],
         ),
       ),
@@ -97,8 +97,8 @@ class _HomepageState extends State<Homepage> {
         barItems: [
           BarItem(title: 'Home', icon: Icons.home_filled),
           BarItem(title: 'Report', icon: Icons.receipt_long_outlined),
-          BarItem(title: 'Alamanac', icon: Icons.list_alt_rounded),
           BarItem(title: 'Memo', icon: Icons.note_sharp),
+          BarItem(title: 'Alamanac', icon: Icons.list_alt_rounded),
         ],
         selectedIndex: _currentPos,
         onButtonPressed: (index) {

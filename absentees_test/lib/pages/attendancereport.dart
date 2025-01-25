@@ -1,3 +1,5 @@
+// ignore_for_file: non_constant_identifier_names
+
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -195,7 +197,7 @@ class _AttendancereportState extends State<Attendancereport> {
             Padding(
               padding: const EdgeInsets.fromLTRB(15.0, 0, 0, 0),
               child: Text(
-                "Cummulative \nAttendance Report:",
+                "Overview:",
                 style: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,

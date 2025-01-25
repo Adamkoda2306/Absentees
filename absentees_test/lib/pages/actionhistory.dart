@@ -61,7 +61,7 @@ class _AttendanceHistoryState extends State<AttendanceHistory> {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         title: Text(
-          'Attendance History',
+          'Action History',
           style: TextStyle(
             color: inversePrimaryColor,
           ),

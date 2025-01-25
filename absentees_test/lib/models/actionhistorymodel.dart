@@ -1,3 +1,4 @@
+import 'dart:developer'; // Import the log framework
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 import '../database/classesdata.dart';
@@ -20,9 +21,8 @@ class FunctionModel {
 
     return await openDatabase(
       path,
-      version: 2, // Incremented version to trigger onCreate or onUpgrade
+      version: 2,
       onCreate: (db, version) async {
-        // Create table for actionHistory
         await db.execute('''
           CREATE TABLE actionHistory (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -33,9 +33,9 @@ class FunctionModel {
             subjectName TEXT NOT NULL
           );
         ''');
+        log('Database created with table actionHistory', name: 'FunctionModel');
       },
       onUpgrade: (db, oldVersion, newVersion) async {
-        // Handle upgrade to version 2
         if (oldVersion < 2) {
           await db.execute('''
             CREATE TABLE IF NOT EXISTS actionHistory (
@@ -47,6 +47,8 @@ class FunctionModel {
               subjectName TEXT NOT NULL
             );
           ''');
+          log('Database upgraded to version $newVersion',
+              name: 'FunctionModel');
         }
       },
     );
@@ -64,16 +66,16 @@ class FunctionModel {
       'note': note,
       'subjectName': subjectName,
     });
+    log('Recorded action: $action for subject: $subjectName with note: $note',
+        name: 'FunctionModel');
   }
 
-  Future<void> addAbsent(
-      String subjectName, int completedClasses, int absent, String note) async {
-    final db =
-        await ClassesData.instance.database; // Access ClassesData database
+  Future<void> addAbsent(String subjectName, int absent, String note) async {
+    final db = await ClassesData.instance.database;
 
-    if (absent > 0) {
+    if (absent >= 0) {
       await db.update(
-        ClassesData.table, // Use the ClassesData table
+        ClassesData.table,
         {
           ClassesData.columnAbsents: absent + 1,
         },
@@ -82,19 +84,17 @@ class FunctionModel {
       );
       await recordAction('Absent Added', subjectName, note);
     } else {
-      // Avoid negative absents
-      print("Absent count cannot be negative");
+      log("Attempted to add negative absent count", name: 'FunctionModel');
     }
   }
 
   Future<void> cancelClass(
       String subjectName, int totalClasses, String note) async {
-    final db =
-        await ClassesData.instance.database; // Access ClassesData database
+    final db = await ClassesData.instance.database;
 
     if (totalClasses > 0) {
       await db.update(
-        ClassesData.table, // Use the ClassesData table
+        ClassesData.table,
         {
           ClassesData.columnTotalClasses: totalClasses - 1,
         },
@@ -103,46 +103,46 @@ class FunctionModel {
       );
       await recordAction('Class Cancelled', subjectName, note);
     } else {
-      // Avoid negative totalClasses
-      print("Total classes cannot be negative");
+      log("Attempted to cancel class when totalClasses is zero or negative",
+          name: 'FunctionModel');
     }
   }
 
-  Future<void> addExtraClass(String subjectName, int totalClasses,
-      int completedClasses, String note) async {
-    final db =
-        await ClassesData.instance.database; // Access ClassesData database
+  Future<void> addExtraClass(
+      String subjectName, int totalClasses, String note) async {
+    final db = await ClassesData.instance.database;
 
     await db.update(
-      ClassesData.table, // Use the ClassesData table
+      ClassesData.table,
       {
         ClassesData.columnTotalClasses: totalClasses + 1,
-        ClassesData.columnCompletedClasses: completedClasses + 1,
       },
       where: '${ClassesData.columnSubjectName} = ?',
       whereArgs: [subjectName],
     );
 
     await recordAction('Extra Class Added', subjectName, note);
+    log('Added extra class for subject: $subjectName', name: 'FunctionModel');
   }
 
   Future<List<Map<String, dynamic>>> getActionHistory(
       String subjectName) async {
     final db = await instance.database;
-    return await db.query(
+    final result = await db.query(
       'actionHistory',
       where: 'subjectName = ?',
       whereArgs: [subjectName],
       orderBy: 'id DESC',
     );
+    log('Fetched action history for subject: $subjectName with ${result.length} entries',
+        name: 'FunctionModel');
+    return result;
   }
 
   Future<void> undoAction(
       int actionId, String action, String subjectName) async {
-    final db =
-        await ClassesData.instance.database; // Access ClassesData database
+    final db = await ClassesData.instance.database;
 
-    // Fetch the subject data to ensure it exists before undoing any action
     final subject = await db.query(
       ClassesData.table,
       where: '${ClassesData.columnSubjectName} = ?',
@@ -151,7 +151,6 @@ class FunctionModel {
 
     if (subject.isNotEmpty) {
       if (action == 'Absent Added') {
-        // Undo 'Absent Added' by decrementing the absents count
         int absents = subject.first[ClassesData.columnAbsents] as int;
         if (absents > 0) {
           await db.update(
@@ -161,11 +160,10 @@ class FunctionModel {
             whereArgs: [subjectName],
           );
         } else {
-          // Prevent absents from going negative
-          print("Cannot undo absent action, absents are already zero");
+          log("Cannot undo absent action, absents are already zero",
+              name: 'FunctionModel');
         }
       } else if (action == 'Class Cancelled') {
-        // Undo 'Class Cancelled' by incrementing the totalClasses count
         int totalClasses = subject.first[ClassesData.columnTotalClasses] as int;
         await db.update(
           ClassesData.table,
@@ -174,42 +172,40 @@ class FunctionModel {
           whereArgs: [subjectName],
         );
       } else if (action == 'Extra Class Added') {
-        // Undo 'Extra Class Added' by decrementing both totalClasses and completedClasses
         int totalClasses = subject.first[ClassesData.columnTotalClasses] as int;
-        int completedClasses =
-            subject.first[ClassesData.columnCompletedClasses] as int;
-        if (totalClasses > 0 && completedClasses > 0) {
+        if (totalClasses > 0) {
           await db.update(
             ClassesData.table,
             {
               ClassesData.columnTotalClasses: totalClasses - 1,
-              ClassesData.columnCompletedClasses: completedClasses - 1,
             },
             where: '${ClassesData.columnSubjectName} = ?',
             whereArgs: [subjectName],
           );
         } else {
-          print("Cannot undo extra class, values are already at zero");
+          log("Cannot undo extra class, values are already at zero",
+              name: 'FunctionModel');
         }
       }
     } else {
-      // Log or handle the case where the subject was not found
-      print("Subject not found in database for $subjectName.");
+      log("Subject not found in database for $subjectName",
+          name: 'FunctionModel');
     }
 
-    // Delete the action from actionHistory
     final dbInstance = await instance.database;
     await dbInstance.delete(
       'actionHistory',
       where: 'id = ?',
       whereArgs: [actionId],
     );
+    log('Deleted action with ID: $actionId', name: 'FunctionModel');
   }
 
   Future<void> close() async {
     final db = await _database;
     if (db != null) {
       await db.close();
+      log('Database connection closed', name: 'FunctionModel');
     }
   }
 }

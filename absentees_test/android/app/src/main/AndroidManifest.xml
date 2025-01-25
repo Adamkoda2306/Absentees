@@ -1,6 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <application
-        android:label="absentees_test"
+        android:label="Absentees"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
